@@ -1,28 +1,21 @@
 import React, { useState } from 'react';
-import { SITE_CONFIG, generateWhatsAppConsultationUrl, formatRupiah } from '../config/site';
+import { generateWhatsAppConsultationUrl } from '../config/site';
 import {
   Sparkles,
   ArrowRight,
   CheckCircle2,
-  Clock,
-  Check,
-  ShieldCheck,
-  Laptop,
-  ShoppingBag,
-  Building2,
-  Palette,
   Zap,
   Smartphone,
-  MessageCircle
+  MessageCircle,
+  Palette,
+  ShieldCheck,
+  Sliders
 } from 'lucide-react';
 import { WhatsAppIcon } from './SocialIcons';
 
 export const Hero: React.FC = () => {
-  // Selected Website Type
-  const [selectedType, setSelectedType] = useState<'landing' | 'company' | 'ecommerce' | 'portfolio'>('ecommerce');
-
-  // Selected Focus / Feature Priority
-  const [selectedFocus, setSelectedFocus] = useState<'whatsapp' | 'speed' | 'mobile' | 'interactive'>('whatsapp');
+  // Active Interactive Demo Tab
+  const [activeTab, setActiveTab] = useState<'speed' | 'mobile' | 'whatsapp' | 'design'>('speed');
 
   // Interactive Toast
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -32,56 +25,11 @@ export const Hero: React.FC = () => {
     setTimeout(() => setToastMessage(null), 3000);
   };
 
-  const typeConfigs = {
-    ecommerce: {
-      id: 'ecommerce',
-      title: 'Toko Online & Katalog WhatsApp',
-      category: 'E-Commerce Retail',
-      price: 1750000,
-      days: '5-7 Hari Kerja',
-      icon: ShoppingBag,
-      tagline: 'Katalog belanja estetik dengan checkout langsung ke WhatsApp tanpa potongan fee marketplace.',
-      features: ['Katalog produk visual interaktif', 'Tombol pesan instan ke WhatsApp', '100% profit penjualan milikmu']
-    },
-    landing: {
-      id: 'landing',
-      title: 'Landing Page Interaktif',
-      category: 'Promosi Produk & Event',
-      price: 650000,
-      days: '3-5 Hari Kerja',
-      icon: Laptop,
-      tagline: 'Halaman promosi berkonversi tinggi yang dirancang khusus untuk memikat calon pembeli seketika.',
-      features: ['Copywriting persuasif terstruktur', 'Animasi interaktif halus & modern', 'Loading kilat tanpa lemot di ponsel']
-    },
-    company: {
-      id: 'company',
-      title: 'Company Profile Elegan',
-      category: 'Profil Bisnis & Korporasi',
-      price: 1200000,
-      days: '5-7 Hari Kerja',
-      icon: Building2,
-      tagline: 'Membangun citra kredibel dan profesional untuk meyakinkan klien, partner bisnis, dan investor.',
-      features: ['Tampilan resmi berkelas & elegan', 'Integrasi Google Maps & kontak resmi', 'Optimasi SEO dasar untuk Google']
-    },
-    portfolio: {
-      id: 'portfolio',
-      title: 'Website Portfolio Kreatif',
-      category: 'Personal Branding & Studio',
-      price: 850000,
-      days: '4-6 Hari Kerja',
-      icon: Palette,
-      tagline: 'Galeri pameran karya visual estetik untuk desainer, fotografer, arsitek, dan kreator profesional.',
-      features: ['Galeri visual resolusi tinggi', 'Tautan CV digital & portofolio terkurasi', 'Desain stand out yang berkarakter']
-    }
-  };
-
-  const currentConfig = typeConfigs[selectedType];
-
-  const focusOptions = [
-    { id: 'whatsapp', label: 'Order WhatsApp', icon: MessageCircle, desc: 'Pesan langsung ke WA' },
-    { id: 'speed', label: 'Super Cepat', icon: Zap, desc: '< 1 detik terbuka' },
-    { id: 'mobile', label: 'Mobile-First', icon: Smartphone, desc: 'Nyaman di smartphone' },
-    { id: 'interactive', label: 'Visual Unik', icon: Sparkles, desc: 'Desain stand out' }
+  const featureTabs = [
+    { id: 'speed', label: 'Super Cepat', icon: Zap, color: '#00B349' },
+    { id: 'mobile', label: 'Mobile-First', icon: Smartphone, color: '#2C29FF' },
+    { id: 'whatsapp', label: 'Order WhatsApp', icon: MessageCircle, color: '#00B349' },
+    { id: 'design', label: 'Visual Unik', icon: Palette, color: '#FF2E93' },
   ];
 
   return (
@@ -100,18 +48,9 @@ export const Hero: React.FC = () => {
         <img src="./images/starburst-blue.svg" alt="Starburst Biru Webisa" className="w-full h-full drop-shadow-md" />
       </button>
 
-      <button
-        type="button"
-        onClick={() => showToast('Bikin bisnismu tampil stand out di mata customer')}
-        title="Klik untuk efek visual!"
-        className="absolute top-36 right-6 md:right-20 w-10 h-10 md:w-14 md:h-14 animate-spin-slow hover:scale-125 transition-transform cursor-pointer focus:outline-hidden"
-      >
-        <img src="./images/starburst-red.svg" alt="Starburst Merah Webisa" className="w-full h-full drop-shadow-md" />
-      </button>
-
-      {/* Toast Notification */}
+      {/* Floating Interactive Toast */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 bg-slate-900 text-white px-4 py-2.5 rounded-2xl shadow-2xl border border-slate-700 text-xs font-bold flex items-center gap-2 animate-bounce">
+        <div className="fixed bottom-6 right-6 z-50 bg-slate-900 text-white text-xs font-bold px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-2 border border-slate-700 animate-bounce">
           <Sparkles className="w-4 h-4 text-[#00B349]" />
           <span>{toastMessage}</span>
         </div>
@@ -120,64 +59,36 @@ export const Hero: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
 
-          {/* Left Column: Headlines & Poster Typography (6 cols) */}
-          <div className="lg:col-span-6 text-left space-y-6">
+          {/* Left Column: Slogan & Intro (6 cols) */}
+          <div className="lg:col-span-6 space-y-6 text-left">
 
-            {/* Top Pill Badges */}
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-blue-50 text-[#2C29FF] border border-blue-200 shadow-xs">
-                <Sparkles className="w-3.5 h-3.5" />
-                Jasa Pembuatan Website Malang
-              </span>
+            {/* City & Category Badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-blue-50 text-[#2C29FF] border border-blue-200 shadow-2xs">
+              <span className="w-2 h-2 rounded-full bg-[#00B349] animate-pulse" />
+              <span>Studio Pembuatan Website Malang</span>
             </div>
 
-            {/* Poster Signature Punchline (Typography: FreeSerif Italic + Helvetica Regular) */}
-            <div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl text-slate-900 tracking-tight leading-[1.12]">
-                <span className="font-serif italic font-normal text-slate-900">“Bisnismu</span>{' '}
-                <span className="font-sans font-black text-slate-900">udah keren,</span>
+            {/* Brand Punchline */}
+            <div className="space-y-1">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.08]">
+                Bisnismu{' '}
+                <span className="font-serif italic font-normal text-[#2C29FF] tracking-normal">
+                  udah keren,
+                </span>
                 <br />
-                <span className="font-sans font-black text-slate-900">Masa</span>{' '}
-                <span className="font-serif italic font-normal text-[#2C29FF] underline decoration-[#00B349] decoration-wavy decoration-3">
-                  Websitemu
-                </span>{' '}
-                <span className="font-sans font-black text-slate-900">jadul?”</span>
+                Masa Websitemu{' '}
+                <span className="font-serif italic font-normal text-[#00B349] tracking-normal">
+                  jadul?
+                </span>
               </h1>
             </div>
 
-            {/* Subtitle from Official Poster */}
-            <p className="text-base sm:text-lg text-slate-600 max-w-xl leading-relaxed font-medium">
-              Bikin Website dengan visual yang bikin betah customer. Ubah pengunjung biasa menjadi pelanggan setia lewat tampilan profesional, responsif di ponsel, dan berkecepatan tinggi.
+            {/* Sub-headline */}
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-xl">
+              Webisa hadir untuk mentransformasi identitas bisnismu menjadi website modern, interaktif, dan berkecepatan tinggi. Siap mengubah pengunjung biasa menjadi pelanggan setia lewat pengalaman digital yang berkesan.
             </p>
 
-            {/* Social & Live Platform Pills from Poster */}
-            <div className="flex flex-wrap items-center gap-2.5 pt-1">
-              <a
-                href={SITE_CONFIG.instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 hover:bg-pink-50 border border-slate-200 text-xs font-bold text-slate-800 transition-colors shadow-2xs"
-              >
-                <span className="w-4 h-4 rounded-full bg-[#FF1E27] flex items-center justify-center text-white text-[9px] font-black">
-                  IG
-                </span>
-                <span>{SITE_CONFIG.instagramHandle}</span>
-              </a>
-
-              <a
-                href={SITE_CONFIG.websiteUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 hover:bg-blue-50 border border-slate-200 text-xs font-bold text-slate-800 transition-colors shadow-2xs"
-              >
-                <span className="w-4 h-4 rounded-full bg-[#2C29FF] flex items-center justify-center text-white text-[9px] font-black">
-                  W
-                </span>
-                <span>webisa.vercel.app</span>
-              </a>
-            </div>
-
-            {/* Core Trust Badges */}
+            {/* Core Trust Points */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-1 text-xs text-slate-800 font-bold">
               <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 border border-slate-200 shadow-2xs">
                 <CheckCircle2 className="w-4 h-4 text-[#00B349] shrink-0" />
@@ -207,155 +118,217 @@ export const Hero: React.FC = () => {
               </a>
 
               <a
-                href="#cara-pesan"
+                href="#layanan"
                 className="px-5 py-3.5 rounded-2xl bg-white hover:bg-slate-50 text-slate-800 font-bold text-sm transition-all border-2 border-slate-200 hover:border-[#00B349] flex items-center gap-2 shadow-xs cursor-pointer"
               >
-                <span>Lihat Cara Pemesanan</span>
+                <span>Lihat Pilihan Layanan</span>
                 <ArrowRight className="w-4 h-4 text-[#00B349]" />
               </a>
             </div>
           </div>
 
-          {/* Right Column: Interactive Project Planner & Studio Configurator (6 cols) */}
+          {/* Right Column: Interactive Standar Kualitas Webisa (6 cols) */}
           <div className="lg:col-span-6">
             <div className="bg-white rounded-3xl border-2 border-slate-200 shadow-xl overflow-hidden p-6 sm:p-7 space-y-5">
-              
+
               {/* Card Header */}
               <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-xl bg-blue-50 text-[#2C29FF] flex items-center justify-center">
-                    <Sparkles className="w-4 h-4" />
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-xl bg-blue-50 text-[#2C29FF] flex items-center justify-center">
+                    <Sliders className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
-                      Rencanakan Sekarang
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
+                      Standar Kualitas
                     </span>
                     <h3 className="text-base sm:text-lg font-black text-slate-900 leading-tight">
-                      Simulasi Kebutuhan Websitemu
+                      Eksplorasi Fitur Webisa
                     </h3>
                   </div>
                 </div>
                 <span className="text-[11px] font-bold text-[#00B349] bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
-                  Konsultasi Gratis
+                  Coba Interaktif
                 </span>
               </div>
 
-              {/* 1. Pilih Tipe Website */}
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-700 block">
-                  1. Pilih Jenis Website yang Dibutuhkan:
-                </label>
-                <div className="grid grid-cols-2 gap-2">
-                  {[
-                    { id: 'ecommerce', label: 'Toko Online WA', icon: ShoppingBag },
-                    { id: 'landing', label: 'Landing Page', icon: Laptop },
-                    { id: 'company', label: 'Company Profile', icon: Building2 },
-                    { id: 'portfolio', label: 'Portfolio Kreatif', icon: Palette },
-                  ].map((item) => {
-                    const Icon = item.icon;
-                    const isSelected = selectedType === item.id;
-                    return (
-                      <button
-                        key={item.id}
-                        type="button"
-                        onClick={() => setSelectedType(item.id as any)}
-                        className={`p-3 rounded-2xl border text-left transition-all flex items-center gap-2.5 cursor-pointer ${
-                          isSelected
-                            ? 'border-[#2C29FF] bg-blue-50/80 text-[#2C29FF] font-bold ring-2 ring-[#2C29FF]/20 shadow-xs'
-                            : 'border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 font-medium'
-                        }`}
-                      >
-                        <Icon className={`w-4 h-4 shrink-0 ${isSelected ? 'text-[#2C29FF]' : 'text-slate-400'}`} />
-                        <span className="text-xs truncate">{item.label}</span>
-                      </button>
-                    );
-                  })}
-                </div>
+              {/* Interactive Feature Selectors */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                {featureTabs.map((tab) => {
+                  const Icon = tab.icon;
+                  const isSelected = activeTab === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      type="button"
+                      onClick={() => setActiveTab(tab.id as any)}
+                      className={`p-2.5 rounded-2xl border text-center transition-all cursor-pointer flex flex-col items-center gap-1.5 ${
+                        isSelected
+                          ? 'border-[#2C29FF] bg-blue-50/80 text-[#2C29FF] font-black ring-2 ring-[#2C29FF]/20 shadow-xs'
+                          : 'border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-600 font-semibold'
+                      }`}
+                    >
+                      <Icon className={`w-4 h-4 ${isSelected ? 'text-[#2C29FF]' : 'text-slate-400'}`} />
+                      <span className="text-[11px] leading-tight">{tab.label}</span>
+                    </button>
+                  );
+                })}
               </div>
 
-              {/* 2. Prioritas Fitur Utama */}
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-700 block">
-                  2. Prioritas Fitur Utama:
-                </label>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
-                  {focusOptions.map((opt) => {
-                    const Icon = opt.icon;
-                    const isSelected = selectedFocus === opt.id;
-                    return (
-                      <button
-                        key={opt.id}
-                        type="button"
-                        onClick={() => setSelectedFocus(opt.id as any)}
-                        className={`p-2 rounded-xl border text-center transition-all cursor-pointer ${
-                          isSelected
-                            ? 'border-[#00B349] bg-emerald-50 text-[#00B349] font-bold ring-2 ring-[#00B349]/20'
-                            : 'border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-600'
-                        }`}
-                      >
-                        <Icon className={`w-3.5 h-3.5 mx-auto mb-1 ${isSelected ? 'text-[#00B349]' : 'text-slate-400'}`} />
-                        <span className="text-[11px] block font-semibold leading-tight">{opt.label}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* 3. Dynamic Summary & Estimation Box */}
-              <div className="p-4 rounded-2xl bg-gradient-to-br from-slate-50 to-blue-50/40 border border-slate-200 space-y-3">
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">
-                      Paket Rekomendasi
-                    </span>
-                    <h4 className="text-sm font-black text-slate-900 mt-0.5">
-                      {currentConfig.title}
-                    </h4>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-[10px] text-slate-400 font-semibold block">Mulai Dari</span>
-                    <span className="text-base font-black text-[#2C29FF]">
-                      {formatRupiah(currentConfig.price)}
-                    </span>
-                  </div>
-                </div>
-
-                <p className="text-xs text-slate-600 leading-snug">
-                  {currentConfig.tagline}
-                </p>
-
-                {/* Feature Checklist */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pt-1 text-[11px] text-slate-700">
-                  {currentConfig.features.map((feat, idx) => (
-                    <div key={idx} className="flex items-center gap-1.5 font-medium">
-                      <Check className="w-3.5 h-3.5 text-[#00B349] shrink-0" />
-                      <span className="truncate">{feat}</span>
+              {/* Live Interactive Canvas */}
+              <div className="min-h-[220px] rounded-2xl bg-slate-50 border border-slate-200 p-5 flex flex-col justify-between">
+                {activeTab === 'speed' && (
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-full bg-emerald-100 text-[#00B349] flex items-center justify-center font-black text-xs">
+                          <Zap className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <span className="text-xs font-black text-slate-900 block">Performa & Kecepatan</span>
+                          <span className="text-[11px] text-slate-500">Skor Pengujian Browser</span>
+                        </div>
+                      </div>
+                      <span className="text-xl font-black text-[#00B349] font-mono">99 / 100</span>
                     </div>
-                  ))}
-                  <div className="flex items-center gap-1.5 font-medium">
-                    <Clock className="w-3.5 h-3.5 text-[#2C29FF] shrink-0" />
-                    <span>Waktu: <strong>{currentConfig.days}</strong></span>
+
+                    <div className="space-y-2">
+                      <div className="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+                        <div className="bg-[#00B349] h-2.5 rounded-full w-[99%] transition-all duration-700" />
+                      </div>
+                      <div className="flex justify-between text-[11px] text-slate-500 font-medium">
+                        <span>Waktu Muat: <strong>0.38 detik</strong></span>
+                        <span>Ukuran Asset: <strong>Teroptimasi Ringan</strong></span>
+                      </div>
+                    </div>
+
+                    <div className="p-3 bg-white rounded-xl border border-slate-200 text-xs text-slate-600 leading-relaxed">
+                      💡 <strong>Tanpa plugin berat:</strong> Dibangun dengan kode bersih modern tanpa script bloated, memastikan pelanggan langsung melihat tawaran bisnismu tanpa menunggu.
+                    </div>
                   </div>
-                </div>
+                )}
+
+                {activeTab === 'mobile' && (
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-full bg-blue-100 text-[#2C29FF] flex items-center justify-center font-black text-xs">
+                          <Smartphone className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <span className="text-xs font-black text-slate-900 block">Mobile-First Architecture</span>
+                          <span className="text-[11px] text-slate-500">Responsif di Semua Ukuran Layar</span>
+                        </div>
+                      </div>
+                      <span className="text-[11px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md">
+                        100% Fluid
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-2 text-center text-xs">
+                      <div className="p-2.5 bg-white rounded-xl border border-slate-200">
+                        <span className="block text-slate-400 text-[10px]">Ukuran Font</span>
+                        <span className="font-bold text-slate-800">Presisi & Jelas</span>
+                      </div>
+                      <div className="p-2.5 bg-white rounded-xl border border-slate-200">
+                        <span className="block text-slate-400 text-[10px]">Tap Target</span>
+                        <span className="font-bold text-slate-800">Ramah Jempol</span>
+                      </div>
+                      <div className="p-2.5 bg-white rounded-xl border border-slate-200">
+                        <span className="block text-slate-400 text-[10px]">Navigasi</span>
+                        <span className="font-bold text-slate-800">Mulus & Cepat</span>
+                      </div>
+                    </div>
+
+                    <div className="p-3 bg-white rounded-xl border border-slate-200 text-xs text-slate-600 leading-relaxed">
+                      📱 <strong>85%+ pengunjung membuka dari smartphone.</strong> Webisa memprioritaskan kenyamanan layar ponsel agar tidak ada tulisan kepotong atau tombol sulit dipencet.
+                    </div>
+                  </div>
+                )}
+
+                {activeTab === 'whatsapp' && (
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-full bg-emerald-100 text-[#00B349] flex items-center justify-center font-black text-xs">
+                          <WhatsAppIcon className="w-4 h-4 fill-[#00B349]" />
+                        </div>
+                        <div>
+                          <span className="text-xs font-black text-slate-900 block">Integrasi WhatsApp Instan</span>
+                          <span className="text-[11px] text-slate-500">Otomasi Format Pesan Pelanggan</span>
+                        </div>
+                      </div>
+                      <span className="text-[11px] font-bold text-[#00B349] bg-emerald-50 px-2 py-0.5 rounded-md">
+                        Direct Conversion
+                      </span>
+                    </div>
+
+                    {/* Chat Bubble Mockup */}
+                    <div className="bg-[#EFEAE2] p-3 rounded-2xl border border-slate-200/80 space-y-2">
+                      <div className="bg-white rounded-2xl rounded-tl-xs p-2.5 max-w-[85%] shadow-2xs text-[11px] text-slate-800 space-y-1">
+                        <span className="font-bold text-[#2C29FF] block">Format Otomatis dari Web:</span>
+                        <p className="text-slate-600 leading-relaxed">
+                          "Halo, saya tertarik memesan via website. Apakah produk/layanan ini ready?"
+                        </p>
+                        <span className="text-[9px] text-slate-400 block text-right">10:42 ✓✓</span>
+                      </div>
+                    </div>
+
+                    <div className="text-[11px] text-slate-600 leading-relaxed">
+                      💬 Calon pembeli tidak perlu mengetik panjang atau bingung format pesan. Satu klik langsung terhubung ke nomor bisnismu!
+                    </div>
+                  </div>
+                )}
+
+                {activeTab === 'design' && (
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-full bg-pink-100 text-[#FF2E93] flex items-center justify-center font-black text-xs">
+                          <Palette className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <span className="text-xs font-black text-slate-900 block">Identitas Desain Eksklusif</span>
+                          <span className="text-[11px] text-slate-500">Sesuai Karakter Brand Bisnismu</span>
+                        </div>
+                      </div>
+                      <span className="text-[11px] font-bold text-pink-600 bg-pink-50 px-2 py-0.5 rounded-md">
+                        Anti-Template
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-2">
+                      <div className="p-3 bg-white rounded-2xl border border-slate-200 flex flex-col items-center justify-center text-center">
+                        <img src="./assets/shape-star.png" alt="Star" className="w-7 h-7 mb-1.5" />
+                        <span className="text-[10px] font-bold text-slate-700">Elemen Visual</span>
+                      </div>
+                      <div className="p-3 bg-white rounded-2xl border border-slate-200 flex flex-col items-center justify-center text-center">
+                        <span className="font-serif italic text-xl text-[#2C29FF] font-normal leading-none mb-1.5">Aa</span>
+                        <span className="text-[10px] font-bold text-slate-700">Tipografi Berkelas</span>
+                      </div>
+                      <div className="p-3 bg-white rounded-2xl border border-slate-200 flex flex-col items-center justify-center text-center">
+                        <img src="./assets/shape-leaf.png" alt="Leaf" className="w-7 h-7 mb-1.5" />
+                        <span className="text-[10px] font-bold text-slate-700">Palet Warna Unik</span>
+                      </div>
+                    </div>
+
+                    <div className="text-[11px] text-slate-600 leading-relaxed">
+                      ✨ Tidak memakai template pasaran gratisan yang membosankan. Tampilan bisnismu akan berkesan premium dan stand out.
+                    </div>
+                  </div>
+                )}
               </div>
 
-              {/* Direct WhatsApp Action Button with pre-filled configuration message */}
+              {/* Action Button: Jump to Layanan */}
               <a
-                href={generateWhatsAppConsultationUrl(
-                  currentConfig.title,
-                  `Halo Webisa, saya ingin konsultasi pembuatan ${currentConfig.title} (mulai ${formatRupiah(currentConfig.price)}) dengan prioritas ${focusOptions.find(f => f.id === selectedFocus)?.label}. Apakah slot pengerjaan minggu ini masih tersedia?`
-                )}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-3.5 px-4 bg-[#00B349] hover:bg-[#00963e] text-white rounded-2xl text-xs font-black shadow-md flex items-center justify-center gap-2 transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
+                href="#layanan"
+                className="w-full py-3.5 px-4 bg-[#2C29FF] hover:bg-[#1E1BEE] text-white rounded-2xl text-xs font-black shadow-md flex items-center justify-center gap-2 transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
               >
-                <WhatsAppIcon className="w-4 h-4 fill-white" />
-                <span>Konsultasikan Paket Ini via WhatsApp</span>
+                <span>Lihat 5 Pilihan Layanan Webisa</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
 
               {/* Guarantee Footer Note */}
-              <div className="flex items-center justify-center gap-2 text-[11px] text-slate-400 font-semibold text-center">
+              <div className="flex items-center justify-center gap-2 text-[11px] text-slate-400 font-semibold text-center pt-1">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#00B349]" />
                 <span>Diskusi santai • Tanpa komitmen awal • Solusi tepat sasaran</span>
               </div>

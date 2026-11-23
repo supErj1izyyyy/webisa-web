@@ -1,14 +1,9 @@
-import React, { useState } from 'react';
-import { SERVICES, formatRupiah, generateWhatsAppConsultationUrl } from '../config/site';
-import type { ServiceTypeKey } from '../types';
+import React from 'react';
+import { generateWhatsAppConsultationUrl } from '../config/site';
 import { ArrowRight, FileText, CreditCard, Rocket, Sparkles } from 'lucide-react';
 import { WhatsAppIcon } from './SocialIcons';
 
 export const OrderingGuideSection: React.FC = () => {
-  const [selectedService, setSelectedService] = useState<ServiceTypeKey>('landing');
-
-  const currentService = SERVICES.find((s) => s.id === selectedService) || SERVICES[0];
-
   const steps = [
     {
       number: '1',
@@ -33,58 +28,61 @@ export const OrderingGuideSection: React.FC = () => {
     },
     {
       number: '4',
-      title: 'Kesepakatan & Mulai Pengerjaan',
-      desc: 'Setelah setuju dengan estimasi harga dan jadwal kerja, lakukan pembayaran DP 50% dan tim developer kami langsung mengeksekusi koding.',
+      title: 'Proses Pengerjaan & Review',
+      desc: 'Kami mengerjakan website dengan arsitektur modern dan visual interaktif. Kamu mendapatkan link preview demo langsung untuk ditinjau.',
       icon: CreditCard,
       color: '#FF1E27',
     },
     {
       number: '5',
-      title: 'Review Revisi & Go Live',
-      desc: 'Kamu bisa mencoba langsung website di link preview. Setelah revisi minor tuntas dan pelunasan, website resmi meluncur di domain pilihanmu!',
+      title: 'Revisi & Website Siap Live!',
+      desc: 'Setelah penyesuaian akhir selesai, website langsung kami online-kan ke domain kustommu dan siap mendatangkan pelanggan.',
       icon: Rocket,
       color: '#00B349',
     },
   ];
 
   return (
-    <section id="cara-pesan" className="py-20 md:py-28 bg-[#FAFAFE] border-b border-slate-200/80">
+    <section id="cara-pesan" className="py-20 md:py-28 bg-white border-b border-slate-200/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#00B349]/10 text-[#00B349] border border-[#00B349]/20 mb-3">
+        <div className="max-w-3xl mx-auto text-center mb-14">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-[#2C29FF] border border-blue-200 mb-3">
             <Sparkles className="w-3.5 h-3.5" />
-            Panduan Calon Klien
+            Panduan Pelanggan
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-            Bagaimana <span className="font-quote italic text-[#2C29FF]">Cara Pemesanan</span> di Webisa?
+            Bagaimana <span className="font-serif italic text-[#2C29FF]">Cara Pemesanan</span> di Webisa?
           </h2>
           <p className="mt-4 text-base text-slate-600">
-            Prosesnya sangat simpel, cepat, dan transparan. Kamu tidak perlu mengerti bahasa koding untuk punya website berkelas dunia.
+            Proses pemesanan sangat mudah, transparan, dan tanpa ribet. Cukup 5 langkah santai dari konsultasi awal hingga websitemu live.
           </p>
         </div>
 
-        {/* 5-Step Order Guide Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-16">
-          {steps.map((item, idx) => {
+        {/* 5-Step Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {steps.map((item, index) => {
             const Icon = item.icon;
             return (
               <div
-                key={idx}
-                className="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col justify-between hover:border-[#2C29FF] transition-all hover:-translate-y-1 group"
+                key={index}
+                className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm hover:shadow-md transition-all hover:-translate-y-1 relative group flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span
-                      className="w-8 h-8 rounded-full text-white text-xs font-black flex items-center justify-center shadow-xs"
+                    <div
+                      className="w-12 h-12 rounded-2xl flex items-center justify-center text-white font-black text-lg shadow-sm"
                       style={{ backgroundColor: item.color }}
                     >
                       {item.number}
-                    </span>
-                    <Icon className="w-5 h-5 text-slate-400 group-hover:scale-110 transition-transform" style={{ color: item.color }} />
+                    </div>
+                    <div className="w-8 h-8 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:text-slate-700 transition-colors">
+                      <Icon className="w-4 h-4" />
+                    </div>
                   </div>
-                  <h3 className="font-extrabold text-sm text-slate-900 mb-2">
+
+                  <h3 className="text-base font-black text-slate-900 tracking-tight mb-2">
                     {item.title}
                   </h3>
                   <p className="text-xs text-slate-600 leading-relaxed">
@@ -101,81 +99,25 @@ export const OrderingGuideSection: React.FC = () => {
           })}
         </div>
 
-        {/* Interactive Fast Order Box (Pilih Paket & Direct WA) */}
-        <div className="max-w-4xl mx-auto bg-white rounded-3xl border-2 border-slate-200 p-6 sm:p-8 shadow-xl">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-slate-200">
-            <div>
-              <span className="text-xs font-extrabold uppercase tracking-wider text-[#00B349] block">
-                ✦ Langsung Pesan Sekarang
-              </span>
-              <h3 className="text-xl sm:text-2xl font-black text-slate-900 mt-1">
-                Sudah Menentukan Pilihan Paket?
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-600 mt-1">
-                Pilih paket di bawah dan pesan langsung via WhatsApp dengan pesan otomatis terformat rapi.
-              </p>
-            </div>
-            
-            {/* Quick Consultation Badge */}
-            <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-2xl flex items-center gap-3 shrink-0">
-              <div className="w-10 h-10 rounded-xl bg-[#25D366] text-white flex items-center justify-center shadow-xs">
-                <WhatsAppIcon className="w-6 h-6 fill-white" />
-              </div>
-              <div>
-                <span className="text-[11px] text-slate-500 font-semibold block">Respons Cepat:</span>
-                <span className="text-xs font-extrabold text-slate-900">Online Tiap Hari</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Interactive Service Buttons */}
-          <div className="pt-6">
-            <label className="text-xs font-bold text-slate-700 block mb-3">
-              Pilih Paket Layanan yang Ingin Dipesan:
-            </label>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
-              {SERVICES.map((s) => (
-                <button
-                  key={s.id}
-                  type="button"
-                  onClick={() => setSelectedService(s.id)}
-                  className={`p-3 rounded-2xl border text-left transition-all ${
-                    selectedService === s.id
-                      ? 'border-[#2C29FF] bg-blue-50 text-[#2C29FF] ring-2 ring-[#2C29FF] shadow-xs'
-                      : 'border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100'
-                  }`}
-                >
-                  <span className="font-extrabold text-xs block truncate">{s.title}</span>
-                  <span className="text-[11px] font-bold text-[#00B349] block mt-1">
-                    {formatRupiah(s.startingPrice)}
-                  </span>
-                </button>
-              ))}
-            </div>
-
-            {/* Selected Package Summary & CTA */}
-            <div className="mt-6 p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div>
-                <span className="text-xs text-slate-500 font-medium">Paket Terpilih:</span>
-                <h4 className="text-base font-black text-slate-900">{currentService.title}</h4>
-                <div className="flex items-center gap-2 mt-0.5 text-xs text-slate-600">
-                  <span>Mulai <strong>{formatRupiah(currentService.startingPrice)}</strong></span>
-                  <span>•</span>
-                  <span>Estimasi pengerjaan: <strong>{currentService.deliveryDays}</strong></span>
-                </div>
-              </div>
-
-              <a
-                href={generateWhatsAppConsultationUrl(currentService.title, `Saya ingin memesan paket ${currentService.title} seharga mulai ${formatRupiah(currentService.startingPrice)}`)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto px-6 py-3.5 bg-[#2C29FF] hover:bg-[#1E1BEE] text-white rounded-xl text-xs font-extrabold flex items-center justify-center gap-2 transition-all shadow-md hover:scale-[1.02] shrink-0"
-              >
-                <WhatsAppIcon className="w-4 h-4" />
-                <span>Pesan Paket Ini via WhatsApp</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
+        {/* Clean Consultation Call-to-Action Banner */}
+        <div className="max-w-3xl mx-auto p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-slate-50 to-blue-50/50 border-2 border-slate-200 text-center space-y-4 shadow-sm">
+          <h3 className="text-xl sm:text-2xl font-black text-slate-900">
+            Siap Bikin Websitemu Naik Level?
+          </h3>
+          <p className="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto">
+            Diskusikan kebutuhan website bisnismu langsung dengan kami. Konsultasi 100% gratis, respons cepat, dan tanpa komitmen awal.
+          </p>
+          <div className="pt-2">
+            <a
+              href={generateWhatsAppConsultationUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-[#00B349] hover:bg-[#00963e] text-white text-xs font-black shadow-md hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+            >
+              <WhatsAppIcon className="w-4 h-4 fill-white" />
+              <span>Mulai Konsultasi via WhatsApp</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
           </div>
         </div>
 
