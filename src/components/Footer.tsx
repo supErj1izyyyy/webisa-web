@@ -13,19 +13,19 @@ const InstagramIcon: React.FC<{ className?: string }> = ({ className = 'w-3.5 h-
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-slate-900 text-white pt-16 pb-12 border-t border-slate-800">
+    <footer className="bg-slate-50 text-slate-800 pt-16 pb-12 border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Footer Row */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-slate-800">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-slate-200">
           
           {/* Brand & Vibe: 5 cols */}
           <div className="md:col-span-5 space-y-4">
             <Logo size="md" />
-            <p className="font-quote italic text-sm text-[#FF2E93]">
+            <p className="font-quote italic text-sm text-[#FF1E27] font-bold">
               {SITE_CONFIG.punchline}
             </p>
-            <p className="text-xs text-slate-400 max-w-sm leading-relaxed">
+            <p className="text-xs text-slate-600 max-w-sm leading-relaxed">
               Studio pembuatan website interaktif, modern, dan custom berbasis di Malang. Kami membantu bisnismu tampil profesional, kredibel, dan memikat lebih banyak customer.
             </p>
 
@@ -34,9 +34,9 @@ export const Footer: React.FC = () => {
                 href={SITE_CONFIG.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-[#FF2E93] text-xs font-bold text-slate-300 hover:text-white transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-pink-50 border border-slate-200 text-xs font-bold text-slate-700 hover:text-[#FF2E93] transition-colors shadow-xs"
               >
-                <InstagramIcon className="w-3.5 h-3.5" />
+                <InstagramIcon className="w-3.5 h-3.5 text-[#FF2E93]" />
                 <span>{SITE_CONFIG.instagramHandle}</span>
               </a>
 
@@ -44,22 +44,22 @@ export const Footer: React.FC = () => {
                 href={generateWhatsAppConsultationUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#2C29FF] hover:bg-[#1E1BEE] text-xs font-bold text-white transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#2C29FF] hover:bg-[#1E1BEE] text-xs font-bold text-white transition-colors shadow-xs"
               >
                 <MessageSquare className="w-3.5 h-3.5" />
-                <span>WhatsApp</span>
+                <span>WhatsApp Admin</span>
               </a>
             </div>
           </div>
 
           {/* Quick Nav: 3 cols */}
           <div className="md:col-span-3 space-y-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block">
+            <span className="text-xs font-extrabold uppercase tracking-wider text-slate-400 block">
               Menu Cepat
             </span>
-            <ul className="space-y-2 text-xs text-slate-300">
+            <ul className="space-y-2 text-xs font-semibold text-slate-600">
               <li>
-                <a href="#layanan" className="hover:text-[#00B349] transition-colors">
+                <a href="#layanan" className="hover:text-[#2C29FF] transition-colors">
                   Layanan & Harga
                 </a>
               </li>
@@ -69,17 +69,17 @@ export const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href="#estimator" className="hover:text-[#00B349] transition-colors">
+                <a href="#estimator" className="hover:text-[#2C29FF] transition-colors">
                   Kalkulator Estimasi Biaya
                 </a>
               </li>
               <li>
-                <a href="#alur-kerja" className="hover:text-[#00B349] transition-colors">
+                <a href="#alur-kerja" className="hover:text-[#2C29FF] transition-colors">
                   Alur Pengerjaan
                 </a>
               </li>
               <li>
-                <a href="#tentang" className="hover:text-[#00B349] transition-colors">
+                <a href="#tentang" className="hover:text-[#2C29FF] transition-colors">
                   Tentang Webisa
                 </a>
               </li>
@@ -88,28 +88,28 @@ export const Footer: React.FC = () => {
 
           {/* Services Quicklist: 4 cols */}
           <div className="md:col-span-4 space-y-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block">
+            <span className="text-xs font-extrabold uppercase tracking-wider text-slate-400 block">
               Kategori Layanan
             </span>
-            <ul className="space-y-2 text-xs text-slate-300">
+            <ul className="space-y-2 text-xs font-medium text-slate-600">
               <li className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#2C29FF]" />
+                <span className="w-2 h-2 rounded-full bg-[#2C29FF]" />
                 <span>Landing Page Interaktif (Konversi Penjualan)</span>
               </li>
               <li className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#00B349]" />
+                <span className="w-2 h-2 rounded-full bg-[#00B349]" />
                 <span>Company Profile Elegan (Branding Kredibel)</span>
               </li>
               <li className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#FF1E27]" />
+                <span className="w-2 h-2 rounded-full bg-[#FF1E27]" />
                 <span>E-Commerce & Toko Online Direct WA</span>
               </li>
               <li className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#FF2E93]" />
+                <span className="w-2 h-2 rounded-full bg-[#FF2E93]" />
                 <span>Website Portfolio Personal Kreatif</span>
               </li>
               <li className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#2C29FF]" />
+                <span className="w-2 h-2 rounded-full bg-[#2C29FF]" />
                 <span>Custom Web Solutions (React, 3D WebGL)</span>
               </li>
             </ul>
@@ -122,7 +122,7 @@ export const Footer: React.FC = () => {
           <p>
             © {new Date().getFullYear()} <strong>Webisa</strong>. Seluruh hak cipta dilindungi. Dibuat di Kota Malang.
           </p>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 font-semibold">
             <span>Tugas Akhir Mata Kuliah Kewirausahaan</span>
             <span>•</span>
             <span className="text-[#00B349] font-bold">Technopreneur Group</span>

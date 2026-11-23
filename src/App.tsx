@@ -1,6 +1,8 @@
 import React from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { InteractiveTicker } from './components/InteractiveTicker';
+import { BeforeAfterSection } from './components/BeforeAfterSection';
 import { ServicesSection } from './components/ServicesSection';
 import { PortfolioSection } from './components/PortfolioSection';
 import { ProjectEstimator } from './components/ProjectEstimator';
@@ -11,31 +13,37 @@ import { Footer } from './components/Footer';
 
 export const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col font-sans transition-colors duration-200">
+    <div className="min-h-screen bg-white text-slate-900 flex flex-col font-sans selection:bg-[#2C29FF] selection:text-white">
       {/* Sticky Header */}
       <Navbar />
 
       {/* Main Content Sections */}
       <main className="flex-1">
-        {/* 1. Hero with poster quotes and floating interactive preview */}
+        {/* 1. Hero with live interactive sandbox simulator */}
         <Hero />
 
-        {/* 2. Official 5 Services from Poster */}
+        {/* 2. Interactive Infinite Marquee Ticker */}
+        <InteractiveTicker />
+
+        {/* 3. Interactive Before vs After Comparison */}
+        <BeforeAfterSection />
+
+        {/* 4. Official 5 Services from Poster */}
         <ServicesSection />
 
-        {/* 3. Trusted By / Portfolio Showcase (Treedible Case Study) */}
+        {/* 5. Trusted By / Portfolio Showcase (Treedible Case Study with screen switcher) */}
         <PortfolioSection />
 
-        {/* 4. Interactive Project Budget Estimator */}
+        {/* 6. Interactive Project Budget Estimator */}
         <ProjectEstimator />
 
-        {/* 5. 4-Step Agile Workflow */}
+        {/* 7. 4-Step Agile Workflow */}
         <WorkflowSection />
 
-        {/* 6. About Webisa (Story & Technopreneur values) */}
+        {/* 8. About Webisa (Story & Technopreneur values) */}
         <AboutSection />
 
-        {/* 7. FAQ */}
+        {/* 9. FAQ Accordions */}
         <FaqSection />
       </main>
 
