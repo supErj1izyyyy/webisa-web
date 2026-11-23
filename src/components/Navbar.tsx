@@ -24,12 +24,8 @@ export const Navbar: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Layanan', href: '#layanan' },
-    { name: 'Portofolio', href: '#portofolio' },
-    { name: 'Estimator Biaya', href: '#estimator' },
-    { name: 'Alur Kerja', href: '#alur-kerja' },
-    { name: 'FAQ', href: '#faq' },
-    { name: 'Tentang', href: '#tentang' },
+    { name: 'Layanan Kami', href: '#layanan' },
+    { name: 'Estimator Biaya Project', href: '#estimator' },
   ];
 
   return (
