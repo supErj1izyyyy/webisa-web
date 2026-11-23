@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SERVICES, formatRupiah, generateWhatsAppConsultationUrl } from '../config/site';
 import type { ServiceTypeKey } from '../types';
-import { Check, ArrowUpRight, Sparkles, Clock, ShieldCheck, Flame } from 'lucide-react';
+import { Check, ArrowUpRight, Sparkles, Clock, ShieldCheck, Flame, ArrowRight } from 'lucide-react';
 
 export const ServicesSection: React.FC = () => {
   const [selectedFilter, setSelectedFilter] = useState<'all' | ServiceTypeKey>('all');
@@ -11,10 +11,19 @@ export const ServicesSection: React.FC = () => {
     ? SERVICES
     : SERVICES.filter((s) => s.id === selectedFilter);
 
+  // Map each service to its brand shape glyph from Webisa_Asset Poster
+  const serviceGlyphs: Record<string, string> = {
+    landing: './assets/shape-star.png',
+    company: './assets/shape-asterisk.png',
+    ecommerce: './assets/shape-leaf.png',
+    portfolio: './assets/shape-asterisk.png',
+    custom: './assets/shape-star.png'
+  };
+
   return (
     <section id="layanan" className="py-20 md:py-28 bg-[#FAFAFE] border-b border-slate-200/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-14">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#00B349]/10 text-[#00B349] border border-[#00B349]/20 mb-3">
@@ -22,7 +31,7 @@ export const ServicesSection: React.FC = () => {
             Layanan Resmi Webisa
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-            Pilihan Solusi Website untuk <span className="font-quote italic text-[#2C29FF]">Bisnis Masa Kini</span>
+            Pilihan Solusi Website untuk <span className="font-serif italic text-[#2C29FF]">Bisnis Masa Kini</span>
           </h2>
           <p className="mt-4 text-base text-slate-600">
             Dari landing page penjualan instan hingga aplikasi web custom berkemampuan interaktif tinggi. Semua dikerjakan dengan standar visual modern dan mobile-first.
@@ -33,7 +42,7 @@ export const ServicesSection: React.FC = () => {
             <button
               type="button"
               onClick={() => setSelectedFilter('all')}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-xs ${
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer ${
                 selectedFilter === 'all'
                   ? 'bg-[#2C29FF] text-white'
                   : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300'
@@ -46,7 +55,7 @@ export const ServicesSection: React.FC = () => {
                 key={s.id}
                 type="button"
                 onClick={() => setSelectedFilter(s.id)}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-xs ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer ${
                   selectedFilter === s.id
                     ? 'bg-[#2C29FF] text-white'
                     : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300'
@@ -63,6 +72,7 @@ export const ServicesSection: React.FC = () => {
           {filteredServices.map((service) => {
             const isPopular = service.badge === 'Paling Populer';
             const isExpanded = expandedService === service.id;
+            const glyph = serviceGlyphs[service.id] || './assets/shape-star.png';
 
             return (
               <div
@@ -86,10 +96,14 @@ export const ServicesSection: React.FC = () => {
                 )}
 
                 <div>
-                  {/* Category & Title */}
-                  <span className="text-[11px] font-bold tracking-wider uppercase text-slate-400 block mb-1">
-                    {service.category}
-                  </span>
+                  {/* Category & Title with Official Shape Glyph */}
+                  <div className="flex items-center gap-2 mb-2">
+                    <img src={glyph} alt="" className="w-5 h-5 object-contain shrink-0 select-none" />
+                    <span className="text-[11px] font-bold tracking-wider uppercase text-slate-400">
+                      {service.category}
+                    </span>
+                  </div>
+
                   <h3 className="text-xl font-black text-slate-900 tracking-tight mb-2">
                     {service.title}
                   </h3>
@@ -127,7 +141,7 @@ export const ServicesSection: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => setExpandedService(isExpanded ? null : service.id)}
-                        className="text-[11px] font-bold text-[#2C29FF] hover:underline pt-1 block"
+                        className="text-[11px] font-bold text-[#2C29FF] hover:underline pt-1 block cursor-pointer"
                       >
                         {isExpanded ? 'Sembunyikan Rincian' : `+ Lihat ${service.benefits.length - 3} Rincian Lainnya`}
                       </button>
@@ -145,7 +159,7 @@ export const ServicesSection: React.FC = () => {
                   href={generateWhatsAppConsultationUrl(service.title, `Saya ingin konsultasi paket ${service.title} (mulai ${formatRupiah(service.startingPrice)})`)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`w-full py-3 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-xs ${
+                  className={`w-full py-3 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-xs cursor-pointer ${
                     isPopular
                       ? 'bg-[#2C29FF] hover:bg-[#1E1BEE] text-white shadow-md'
                       : 'bg-slate-900 hover:bg-[#2C29FF] text-white'
@@ -178,9 +192,10 @@ export const ServicesSection: React.FC = () => {
             href={generateWhatsAppConsultationUrl('Custom Website Spesifik')}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-5 py-2.5 rounded-xl bg-[#2C29FF] hover:bg-[#1E1BEE] text-white text-xs font-bold shrink-0 transition-all shadow-xs"
+            className="px-6 py-3 rounded-2xl bg-[#00B349] hover:bg-[#00963e] text-white text-xs font-extrabold flex items-center gap-2 shrink-0 shadow-sm transition-all hover:scale-102 cursor-pointer"
           >
-            Diskusi Kebutuhan Custom
+            <span>Konsultasi Ide Khusus</span>
+            <ArrowRight className="w-4 h-4" />
           </a>
         </div>
 
