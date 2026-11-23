@@ -39,15 +39,11 @@ export const Navbar: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo & Tagline Badge */}
-          <div className="flex items-center gap-3">
+          {/* Logo */}
+          <div className="flex items-center">
             <a href="#" className="flex items-center group" aria-label="Webisa Beranda">
               <Logo size="md" />
             </a>
-            <span className="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-[#00B349] border border-emerald-200">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00B349]" />
-              Modern • Interactive • Custom
-            </span>
           </div>
 
           {/* Desktop Navigation Links */}
