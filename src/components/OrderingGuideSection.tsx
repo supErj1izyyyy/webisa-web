@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { SERVICES, formatRupiah, generateWhatsAppConsultationUrl } from '../config/site';
 import type { ServiceTypeKey } from '../types';
-import { MessageSquare, ArrowRight, FileText, CreditCard, Rocket, Sparkles } from 'lucide-react';
+import { ArrowRight, FileText, CreditCard, Rocket, Sparkles } from 'lucide-react';
+import { WhatsAppIcon } from './SocialIcons';
 
 export const OrderingGuideSection: React.FC = () => {
   const [selectedService, setSelectedService] = useState<ServiceTypeKey>('landing');
@@ -116,9 +117,9 @@ export const OrderingGuideSection: React.FC = () => {
             </div>
             
             {/* Quick Consultation Badge */}
-            <div className="p-3 bg-blue-50 border border-blue-200 rounded-2xl flex items-center gap-3 shrink-0">
-              <div className="w-10 h-10 rounded-xl bg-[#2C29FF] text-white flex items-center justify-center font-bold">
-                WA
+            <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-2xl flex items-center gap-3 shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-[#25D366] text-white flex items-center justify-center shadow-xs">
+                <WhatsAppIcon className="w-6 h-6 fill-white" />
               </div>
               <div>
                 <span className="text-[11px] text-slate-500 font-semibold block">Respons Cepat:</span>
@@ -170,7 +171,7 @@ export const OrderingGuideSection: React.FC = () => {
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto px-6 py-3.5 bg-[#2C29FF] hover:bg-[#1E1BEE] text-white rounded-xl text-xs font-extrabold flex items-center justify-center gap-2 transition-all shadow-md hover:scale-[1.02] shrink-0"
               >
-                <MessageSquare className="w-4 h-4" />
+                <WhatsAppIcon className="w-4 h-4" />
                 <span>Pesan Paket Ini via WhatsApp</span>
                 <ArrowRight className="w-4 h-4" />
               </a>

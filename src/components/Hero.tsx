@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { SITE_CONFIG, generateWhatsAppConsultationUrl } from '../config/site';
 import {
-  MessageSquare,
   Sparkles,
   ArrowRight,
   CheckCircle2,
@@ -10,6 +9,7 @@ import {
   ShieldCheck,
   ArrowUpRight
 } from 'lucide-react';
+import { WhatsAppIcon } from './SocialIcons';
 
 export const Hero: React.FC = () => {
   // Interactive Business Matcher State
@@ -169,7 +169,7 @@ export const Hero: React.FC = () => {
                 rel="noopener noreferrer"
                 className="px-7 py-3.5 rounded-2xl bg-[#2C29FF] hover:bg-[#1E1BEE] text-white font-extrabold text-sm transition-all shadow-md hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2 cursor-pointer"
               >
-                <MessageSquare className="w-4 h-4" />
+                <WhatsAppIcon className="w-4 h-4" />
                 <span>Konsultasi Project Gratis</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
