@@ -21,7 +21,7 @@ export const OrderingGuideSection: React.FC = () => {
       number: '2',
       title: 'Konsultasi Gratis via WhatsApp',
       desc: 'Diskusikan referensi visual yang kamu suka dan fitur yang diinginkan. Tim Webisa akan memberikan saran terbaik tanpa biaya konsultasi.',
-      icon: MessageSquare,
+      icon: WhatsAppIcon,
       color: '#00B349',
     },
     {
