@@ -55,22 +55,32 @@ export const Footer: React.FC = () => {
           {/* Quick Nav: 3 cols */}
           <div className="md:col-span-3 space-y-3">
             <span className="text-xs font-extrabold uppercase tracking-wider text-slate-400 block">
-              Menu Layanan
+              Menu Utama
             </span>
             <ul className="space-y-2 text-xs font-semibold text-slate-600">
               <li>
+                <a href="#pengenalan" className="hover:text-[#2C29FF] transition-colors">
+                  Pengenalan Webisa
+                </a>
+              </li>
+              <li>
                 <a href="#layanan" className="hover:text-[#2C29FF] transition-colors">
-                  Paket & Spesifikasi Layanan
+                  Pilihan Layanan
                 </a>
               </li>
               <li>
-                <a href="#estimator" className="hover:text-[#2C29FF] transition-colors">
-                  Kalkulator Estimasi Biaya
+                <a href="#cara-pesan" className="hover:text-[#2C29FF] transition-colors">
+                  Bagaimana Cara Pemesanan
                 </a>
               </li>
               <li>
-                <a href="#portofolio" className="hover:text-[#00B349] transition-colors">
-                  Studi Kasus Klien (Treedible)
+                <a href="#alur-pemesanan" className="hover:text-[#00B349] transition-colors">
+                  Alur Pemesanan & Pengerjaan
+                </a>
+              </li>
+              <li>
+                <a href="#faq" className="hover:text-[#FF2E93] transition-colors">
+                  FAQ / Tanya Jawab
                 </a>
               </li>
             </ul>

@@ -4,10 +4,8 @@ import { Hero } from './components/Hero';
 import { InteractiveTicker } from './components/InteractiveTicker';
 import { BeforeAfterSection } from './components/BeforeAfterSection';
 import { ServicesSection } from './components/ServicesSection';
-import { PortfolioSection } from './components/PortfolioSection';
-import { ProjectEstimator } from './components/ProjectEstimator';
+import { OrderingGuideSection } from './components/OrderingGuideSection';
 import { WorkflowSection } from './components/WorkflowSection';
-import { AboutSection } from './components/AboutSection';
 import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
 
@@ -17,33 +15,27 @@ export const App: React.FC = () => {
       {/* Sticky Header */}
       <Navbar />
 
-      {/* Main Content Sections */}
+      {/* Main Content Sections: Pengenalan -> Cara Pesan -> Alur Pemesanan -> FAQ */}
       <main className="flex-1">
-        {/* 1. Hero with live interactive sandbox simulator */}
+        {/* 1. Pengenalan Webisa & Headline Poster */}
         <Hero />
 
-        {/* 2. Interactive Infinite Marquee Ticker */}
+        {/* Moving Ticker of Capabilities */}
         <InteractiveTicker />
 
-        {/* 3. Interactive Before vs After Comparison */}
+        {/* Nilai Tambah: Web Jadul vs Standar Webisa */}
         <BeforeAfterSection />
 
-        {/* 4. Official 5 Services from Poster */}
+        {/* 5 Layanan Utama Sesuai Poster */}
         <ServicesSection />
 
-        {/* 5. Trusted By / Portfolio Showcase (Treedible Case Study with screen switcher) */}
-        <PortfolioSection />
+        {/* 2. Bagaimana Cara Pemesanan */}
+        <OrderingGuideSection />
 
-        {/* 6. Interactive Project Budget Estimator */}
-        <ProjectEstimator />
-
-        {/* 7. 4-Step Agile Workflow */}
+        {/* 3. Alur Pemesanan & Pengerjaan (Timeline) */}
         <WorkflowSection />
 
-        {/* 8. About Webisa (Story & Technopreneur values) */}
-        <AboutSection />
-
-        {/* 9. FAQ Accordions */}
+        {/* 4. FAQ (Tanya Jawab Seputar Pemesanan) */}
         <FaqSection />
       </main>
 

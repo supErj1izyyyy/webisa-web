@@ -4,20 +4,20 @@ import { Sparkles, CheckCircle2, Clock } from 'lucide-react';
 
 export const WorkflowSection: React.FC = () => {
   return (
-    <section id="alur-kerja" className="py-20 md:py-28 bg-white border-b border-slate-200/80">
+    <section id="alur-pemesanan" className="py-20 md:py-28 bg-white border-b border-slate-200/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#2C29FF]/10 text-[#2C29FF] border border-[#2C29FF]/20 mb-3">
             <Sparkles className="w-3.5 h-3.5" />
-            Alur Pengerjaan Transparan
+            Transparansi Proses
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-            Bagaimana Website Kerenmu <span className="font-quote italic text-[#00B349]">Diciptakan?</span>
+            Alur <span className="font-quote italic text-[#00B349]">Pemesanan & Pengerjaan</span>
           </h2>
           <p className="mt-4 text-base text-slate-600">
-            Tanpa birokrasi berbelit. Kami mengadopsi alur agile yang cepat, terbuka, dan memastikan hasil akhir sesuai visi bisnismu.
+            Ketahui persis di mana posisi project websitemu berada dari hari pertama hingga resmi meluncur di internet.
           </p>
         </div>
 
