@@ -14,15 +14,6 @@ const InstagramIcon: React.FC<{ className?: string }> = ({ className = 'w-3.5 h-
 export const Footer: React.FC = () => {
   return (
     <footer className="bg-slate-50 text-slate-800 border-t border-slate-200 overflow-hidden">
-      {/* Brand Pattern Border across Top of Footer (from Webisa_Asset) */}
-      <div className="w-full overflow-hidden border-b border-slate-200 bg-white">
-        <img
-          src="./assets/brand-pattern-banner.png"
-          alt="Webisa Signature Brand Pattern"
-          className="w-full h-8 md:h-12 object-cover object-center select-none"
-        />
-      </div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
 
         {/* Main Footer Row */}

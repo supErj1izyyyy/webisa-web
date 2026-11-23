@@ -53,7 +53,7 @@ export const Hero: React.FC = () => {
   const currentRec = bizRecommendations[selectedBiz];
 
   return (
-    <section id="pengenalan" className="relative pt-28 pb-10 md:pt-36 md:pb-16 overflow-hidden bg-white bg-grid-pattern">
+    <section id="pengenalan" className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden bg-white bg-grid-pattern">
       {/* Subtle Ambient Radial Light */}
       <div className="absolute top-10 left-1/4 w-[500px] h-[300px] bg-gradient-to-tr from-[#2C29FF]/10 to-transparent blur-3xl -z-10 rounded-full pointer-events-none" />
       <div className="absolute top-20 right-1/4 w-[500px] h-[300px] bg-gradient-to-bl from-[#00B349]/10 to-transparent blur-3xl -z-10 rounded-full pointer-events-none" />
@@ -321,15 +321,6 @@ export const Hero: React.FC = () => {
           </div>
 
         </div>
-      </div>
-
-      {/* Brand Pattern Banner along bottom of Hero (from Webisa_Asset Poster) */}
-      <div className="w-full mt-12 md:mt-16 overflow-hidden border-y border-slate-200/80 bg-white">
-        <img
-          src="./assets/brand-pattern-banner.png"
-          alt="Webisa Signature Brand Pattern"
-          className="w-full h-12 md:h-16 object-cover object-center select-none"
-        />
       </div>
     </section>
   );
