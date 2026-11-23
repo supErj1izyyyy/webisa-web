@@ -1,19 +1,28 @@
 import React, { useState } from 'react';
-import { SITE_CONFIG, generateWhatsAppConsultationUrl } from '../config/site';
+import { SITE_CONFIG, generateWhatsAppConsultationUrl, formatRupiah } from '../config/site';
 import {
   Sparkles,
   ArrowRight,
   CheckCircle2,
-  Zap,
-  TrendingUp,
+  Clock,
+  Check,
   ShieldCheck,
-  ArrowUpRight
+  Laptop,
+  ShoppingBag,
+  Building2,
+  Palette,
+  Zap,
+  Smartphone,
+  MessageCircle
 } from 'lucide-react';
 import { WhatsAppIcon } from './SocialIcons';
 
 export const Hero: React.FC = () => {
-  // Interactive Business Matcher State
-  const [selectedBiz, setSelectedBiz] = useState<'fashion' | 'fnb' | 'service' | 'tech'>('fashion');
+  // Selected Website Type
+  const [selectedType, setSelectedType] = useState<'landing' | 'company' | 'ecommerce' | 'portfolio'>('ecommerce');
+
+  // Selected Focus / Feature Priority
+  const [selectedFocus, setSelectedFocus] = useState<'whatsapp' | 'speed' | 'mobile' | 'interactive'>('whatsapp');
 
   // Interactive Toast
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -23,34 +32,57 @@ export const Hero: React.FC = () => {
     setTimeout(() => setToastMessage(null), 3000);
   };
 
-  const bizRecommendations = {
-    fashion: {
-      type: 'Toko Online & Katalog Interaktif',
-      tagline: 'Katalog produk estetik dengan checkout langsung ke WhatsApp tanpa potongan fee.',
-      estTime: '5-7 Hari Kerja',
-      highlight: 'Konversi order chat meningkat 3x lipat'
+  const typeConfigs = {
+    ecommerce: {
+      id: 'ecommerce',
+      title: 'Toko Online & Katalog WhatsApp',
+      category: 'E-Commerce Retail',
+      price: 1750000,
+      days: '5-7 Hari Kerja',
+      icon: ShoppingBag,
+      tagline: 'Katalog belanja estetik dengan checkout langsung ke WhatsApp tanpa potongan fee marketplace.',
+      features: ['Katalog produk visual interaktif', 'Tombol pesan instan ke WhatsApp', '100% profit penjualan milikmu']
     },
-    fnb: {
-      type: 'Landing Page Menu & Reservasi',
-      tagline: 'Buku menu digital interaktif, integrasi Google Maps, dan tombol order WhatsApp instan.',
-      estTime: '3-5 Hari Kerja',
-      highlight: 'Pelanggan langsung pesan tanpa install aplikasi'
+    landing: {
+      id: 'landing',
+      title: 'Landing Page Interaktif',
+      category: 'Promosi Produk & Event',
+      price: 650000,
+      days: '3-5 Hari Kerja',
+      icon: Laptop,
+      tagline: 'Halaman promosi berkonversi tinggi yang dirancang khusus untuk memikat calon pembeli seketika.',
+      features: ['Copywriting persuasif terstruktur', 'Animasi interaktif halus & modern', 'Loading kilat tanpa lemot di ponsel']
     },
-    service: {
-      type: 'Company Profile Elegan & Kredibel',
-      tagline: 'Membangun kepercayaan calon klien dan investor dengan portfolio profesional berkelas.',
-      estTime: '5-7 Hari Kerja',
-      highlight: 'Tampilan resmi yang meyakinkan partner bisnis'
+    company: {
+      id: 'company',
+      title: 'Company Profile Elegan',
+      category: 'Profil Bisnis & Korporasi',
+      price: 1200000,
+      days: '5-7 Hari Kerja',
+      icon: Building2,
+      tagline: 'Membangun citra kredibel dan profesional untuk meyakinkan klien, partner bisnis, dan investor.',
+      features: ['Tampilan resmi berkelas & elegan', 'Integrasi Google Maps & kontak resmi', 'Optimasi SEO dasar untuk Google']
     },
-    tech: {
-      type: 'Custom Web & Interactive Engine',
-      tagline: 'Fitur unik berbasis React & visual modern seperti kalkulator instan dan formulir dinamis.',
-      estTime: '7-12 Hari Kerja',
-      highlight: 'Solusi teknologi spesifik tanpa batas template'
+    portfolio: {
+      id: 'portfolio',
+      title: 'Website Portfolio Kreatif',
+      category: 'Personal Branding & Studio',
+      price: 850000,
+      days: '4-6 Hari Kerja',
+      icon: Palette,
+      tagline: 'Galeri pameran karya visual estetik untuk desainer, fotografer, arsitek, dan kreator profesional.',
+      features: ['Galeri visual resolusi tinggi', 'Tautan CV digital & portofolio terkurasi', 'Desain stand out yang berkarakter']
     }
   };
 
-  const currentRec = bizRecommendations[selectedBiz];
+  const currentConfig = typeConfigs[selectedType];
+
+  const focusOptions = [
+    { id: 'whatsapp', label: 'Order WhatsApp', icon: MessageCircle, desc: 'Pesan langsung ke WA' },
+    { id: 'speed', label: 'Super Cepat', icon: Zap, desc: '< 1 detik terbuka' },
+    { id: 'mobile', label: 'Mobile-First', icon: Smartphone, desc: 'Nyaman di smartphone' },
+    { id: 'interactive', label: 'Visual Unik', icon: Sparkles, desc: 'Desain stand out' }
+  ];
 
   return (
     <section id="pengenalan" className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden bg-white bg-grid-pattern">
@@ -58,7 +90,7 @@ export const Hero: React.FC = () => {
       <div className="absolute top-10 left-1/4 w-[500px] h-[300px] bg-gradient-to-tr from-[#2C29FF]/10 to-transparent blur-3xl -z-10 rounded-full pointer-events-none" />
       <div className="absolute top-20 right-1/4 w-[500px] h-[300px] bg-gradient-to-bl from-[#00B349]/10 to-transparent blur-3xl -z-10 rounded-full pointer-events-none" />
 
-      {/* Floating Interactive Brand Starbursts from Webisa_Asset */}
+      {/* Floating Interactive Brand Starbursts */}
       <button
         type="button"
         onClick={() => showToast('Desain visual interaktif bikin customer betah')}
@@ -184,140 +216,151 @@ export const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Featured Case Study from Poster (Treedible) & Quick Matcher (6 cols) */}
-          <div className="lg:col-span-6 space-y-4">
-
-            {/* Main Client Showcase Card (As on Poster: "Trusted By Treedible") */}
-            <div className="relative bg-white rounded-3xl border-2 border-slate-200 shadow-xl overflow-hidden group">
-
-              {/* Browser Window Bar */}
-              <div className="bg-slate-100/90 px-4 py-2.5 border-b border-slate-200 flex items-center justify-between">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-3 h-3 rounded-full bg-red-400" />
-                  <span className="w-3 h-3 rounded-full bg-amber-400" />
-                  <span className="w-3 h-3 rounded-full bg-emerald-400" />
+          {/* Right Column: Interactive Project Planner & Studio Configurator (6 cols) */}
+          <div className="lg:col-span-6">
+            <div className="bg-white rounded-3xl border-2 border-slate-200 shadow-xl overflow-hidden p-6 sm:p-7 space-y-5">
+              
+              {/* Card Header */}
+              <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-xl bg-blue-50 text-[#2C29FF] flex items-center justify-center">
+                    <Sparkles className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
+                      Rencanakan Sekarang
+                    </span>
+                    <h3 className="text-base sm:text-lg font-black text-slate-900 leading-tight">
+                      Simulasi Kebutuhan Websitemu
+                    </h3>
+                  </div>
                 </div>
-
-                <div className="flex items-center gap-1.5 bg-white px-3 py-1 rounded-md text-[11px] font-mono text-slate-500 border border-slate-200 shadow-2xs">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#00B349]" />
-                  <span>treedible.com/calculator</span>
-                </div>
-
-                <span className="text-[11px] font-bold text-[#2C29FF] flex items-center gap-1">
-                  <Sparkles className="w-3 h-3" />
-                  Karya Asli Webisa
+                <span className="text-[11px] font-bold text-[#00B349] bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                  Konsultasi Gratis
                 </span>
               </div>
 
-              {/* Showcase Image from Webisa_Asset Poster */}
-              <div className="relative p-3 bg-slate-100/60 overflow-hidden">
-                <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-sm relative group">
-                  <img
-                    src="./assets/treedible-client-showcase.png"
-                    alt="Treedible 3D Printing Showcase"
-                    className="w-full h-auto object-cover transform group-hover:scale-102 transition-transform duration-500"
-                  />
-
-                  {/* Floating Metric Badge 1 (Speed) */}
-                  <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-200 shadow-md flex items-center gap-2 text-xs font-bold text-slate-900 animate-float">
-                    <div className="w-6 h-6 rounded-lg bg-emerald-100 text-[#00B349] flex items-center justify-center">
-                      <Zap className="w-3.5 h-3.5 fill-[#00B349]" />
-                    </div>
-                    <div>
-                      <span className="block text-[10px] text-slate-400 font-semibold uppercase">Google Speed</span>
-                      <span className="text-[#00B349]">⚡ 99/100 Skor HP</span>
-                    </div>
-                  </div>
-
-                  {/* Floating Metric Badge 2 (Conversion) */}
-                  <div className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-200 shadow-md flex items-center gap-2 text-xs font-bold text-slate-900">
-                    <div className="w-6 h-6 rounded-lg bg-blue-100 text-[#2C29FF] flex items-center justify-center">
-                      <TrendingUp className="w-3.5 h-3.5" />
-                    </div>
-                    <div>
-                      <span className="block text-[10px] text-slate-400 font-semibold uppercase">Hasil Nyata</span>
-                      <span className="text-[#2C29FF]">+300% Chat WhatsApp</span>
-                    </div>
-                  </div>
+              {/* 1. Pilih Tipe Website */}
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-slate-700 block">
+                  1. Pilih Jenis Website yang Dibutuhkan:
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  {[
+                    { id: 'ecommerce', label: 'Toko Online WA', icon: ShoppingBag },
+                    { id: 'landing', label: 'Landing Page', icon: Laptop },
+                    { id: 'company', label: 'Company Profile', icon: Building2 },
+                    { id: 'portfolio', label: 'Portfolio Kreatif', icon: Palette },
+                  ].map((item) => {
+                    const Icon = item.icon;
+                    const isSelected = selectedType === item.id;
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => setSelectedType(item.id as any)}
+                        className={`p-3 rounded-2xl border text-left transition-all flex items-center gap-2.5 cursor-pointer ${
+                          isSelected
+                            ? 'border-[#2C29FF] bg-blue-50/80 text-[#2C29FF] font-bold ring-2 ring-[#2C29FF]/20 shadow-xs'
+                            : 'border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 font-medium'
+                        }`}
+                      >
+                        <Icon className={`w-4 h-4 shrink-0 ${isSelected ? 'text-[#2C29FF]' : 'text-slate-400'}`} />
+                        <span className="text-xs truncate">{item.label}</span>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
-              {/* Showcase Footer Bar (Trusted By: Treedible) */}
-              <div className="p-3 bg-white border-t border-slate-200 flex items-center justify-between text-xs">
-                <div className="flex items-center gap-2 text-slate-800 font-bold">
-                  <span className="text-[11px] text-slate-400 font-semibold uppercase">Trusted By:</span>
-                  <span className="text-slate-900 font-black">Treedible 3D Printing Malang</span>
+              {/* 2. Prioritas Fitur Utama */}
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-slate-700 block">
+                  2. Prioritas Fitur Utama:
+                </label>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
+                  {focusOptions.map((opt) => {
+                    const Icon = opt.icon;
+                    const isSelected = selectedFocus === opt.id;
+                    return (
+                      <button
+                        key={opt.id}
+                        type="button"
+                        onClick={() => setSelectedFocus(opt.id as any)}
+                        className={`p-2 rounded-xl border text-center transition-all cursor-pointer ${
+                          isSelected
+                            ? 'border-[#00B349] bg-emerald-50 text-[#00B349] font-bold ring-2 ring-[#00B349]/20'
+                            : 'border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-600'
+                        }`}
+                      >
+                        <Icon className={`w-3.5 h-3.5 mx-auto mb-1 ${isSelected ? 'text-[#00B349]' : 'text-slate-400'}`} />
+                        <span className="text-[11px] block font-semibold leading-tight">{opt.label}</span>
+                      </button>
+                    );
+                  })}
                 </div>
-                <a
-                  href="https://supErj1izyyyy.github.io/treedible-web/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-bold text-[#2C29FF] hover:underline flex items-center gap-1 text-[11px]"
-                >
-                  Buka Demo Live
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </a>
-              </div>
-            </div>
-
-            {/* Interactive "Pencari Solusi Cepat" (Quick Business Matcher) */}
-            <div className="p-4 bg-white rounded-2xl border-2 border-slate-200 shadow-sm space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-extrabold text-slate-900 flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-[#00B349]" />
-                  Pilih Bidang Bisnismu:
-                </span>
-                <span className="text-[11px] text-slate-400 font-medium">Rekomendasi Instan</span>
               </div>
 
-              {/* Category Pills */}
-              <div className="grid grid-cols-4 gap-1.5">
-                {[
-                  { id: 'fashion', label: 'Retail / Olshop' },
-                  { id: 'fnb', label: 'Kuliner / Cafe' },
-                  { id: 'service', label: 'Jasa & Agensi' },
-                  { id: 'tech', label: 'Startup / Tech' },
-                ].map((item) => (
-                  <button
-                    key={item.id}
-                    type="button"
-                    onClick={() => setSelectedBiz(item.id as 'fashion' | 'fnb' | 'service' | 'tech')}
-                    className={`py-1.5 px-2 rounded-xl text-[11px] font-bold transition-all text-center cursor-pointer ${
-                      selectedBiz === item.id
-                        ? 'bg-[#2C29FF] text-white shadow-xs'
-                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                    }`}
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
-
-              {/* Dynamic Result Box */}
-              <div className="p-3 bg-emerald-50/70 border border-emerald-200 rounded-xl flex items-center justify-between gap-3">
-                <div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-xs font-black text-slate-900">{currentRec.type}</span>
-                    <span className="text-[10px] bg-[#00B349] text-white px-2 py-0.2 rounded-full font-bold">
-                      {currentRec.estTime}
+              {/* 3. Dynamic Summary & Estimation Box */}
+              <div className="p-4 rounded-2xl bg-gradient-to-br from-slate-50 to-blue-50/40 border border-slate-200 space-y-3">
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">
+                      Paket Rekomendasi
+                    </span>
+                    <h4 className="text-sm font-black text-slate-900 mt-0.5">
+                      {currentConfig.title}
+                    </h4>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-[10px] text-slate-400 font-semibold block">Mulai Dari</span>
+                    <span className="text-base font-black text-[#2C29FF]">
+                      {formatRupiah(currentConfig.price)}
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-600 mt-0.5 leading-snug">
-                    {currentRec.tagline}
-                  </p>
                 </div>
-                <a
-                  href={generateWhatsAppConsultationUrl(`Paket ${currentRec.type}`, `Tertarik untuk bisnis bidang ${selectedBiz}`)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-3 py-2 bg-[#00B349] hover:bg-[#00963e] text-white rounded-xl text-xs font-extrabold shrink-0 shadow-xs flex items-center gap-1 transition-transform active:scale-95"
-                >
-                  <span>Chat WA</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </a>
-              </div>
-            </div>
 
+                <p className="text-xs text-slate-600 leading-snug">
+                  {currentConfig.tagline}
+                </p>
+
+                {/* Feature Checklist */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pt-1 text-[11px] text-slate-700">
+                  {currentConfig.features.map((feat, idx) => (
+                    <div key={idx} className="flex items-center gap-1.5 font-medium">
+                      <Check className="w-3.5 h-3.5 text-[#00B349] shrink-0" />
+                      <span className="truncate">{feat}</span>
+                    </div>
+                  ))}
+                  <div className="flex items-center gap-1.5 font-medium">
+                    <Clock className="w-3.5 h-3.5 text-[#2C29FF] shrink-0" />
+                    <span>Waktu: <strong>{currentConfig.days}</strong></span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Direct WhatsApp Action Button with pre-filled configuration message */}
+              <a
+                href={generateWhatsAppConsultationUrl(
+                  currentConfig.title,
+                  `Halo Webisa, saya ingin konsultasi pembuatan ${currentConfig.title} (mulai ${formatRupiah(currentConfig.price)}) dengan prioritas ${focusOptions.find(f => f.id === selectedFocus)?.label}. Apakah slot pengerjaan minggu ini masih tersedia?`
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3.5 px-4 bg-[#00B349] hover:bg-[#00963e] text-white rounded-2xl text-xs font-black shadow-md flex items-center justify-center gap-2 transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
+              >
+                <WhatsAppIcon className="w-4 h-4 fill-white" />
+                <span>Konsultasikan Paket Ini via WhatsApp</span>
+                <ArrowRight className="w-4 h-4" />
+              </a>
+
+              {/* Guarantee Footer Note */}
+              <div className="flex items-center justify-center gap-2 text-[11px] text-slate-400 font-semibold text-center">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#00B349]" />
+                <span>Diskusi santai • Tanpa komitmen awal • Solusi tepat sasaran</span>
+              </div>
+
+            </div>
           </div>
 
         </div>
