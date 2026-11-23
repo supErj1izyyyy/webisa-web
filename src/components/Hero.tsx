@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
-import { SITE_CONFIG, generateWhatsAppConsultationUrl, formatRupiah } from '../config/site';
-import { MessageSquare, Calculator, Sparkles, ArrowRight, CheckCircle2, Laptop, Smartphone, Box, ShoppingBag, ExternalLink, RotateCw } from 'lucide-react';
+import { SITE_CONFIG, generateWhatsAppConsultationUrl } from '../config/site';
+import { MessageSquare, Calculator, Sparkles, ArrowRight, CheckCircle2, ExternalLink, Zap, TrendingUp, ShieldCheck, Star, Layers, ArrowUpRight } from 'lucide-react';
 
 export const Hero: React.FC = () => {
-  // Interactive Sandbox States
-  const [deviceMode, setDeviceMode] = useState<'desktop' | 'mobile'>('desktop');
-  const [activeTab, setActiveTab] = useState<'3d' | 'ecommerce' | 'profile'>('3d');
-  
-  // Interactive Mini-App States
-  // 1. 3D Model interactive state
-  const [rotationDeg, setRotationDeg] = useState(25);
-  const [infillVal, setInfillVal] = useState(20);
-  
-  // 2. E-Commerce interactive state
-  const [selectedColor, setSelectedColor] = useState('Biru Webisa');
-  const [cartCount, setCartCount] = useState(0);
+  // Interactive Showcase Tab
+  const [activeShowcase, setActiveShowcase] = useState<'treedible' | 'company' | 'retail'>('treedible');
+
+  // Interactive Business Matcher State
+  const [selectedBiz, setSelectedBiz] = useState<'fnb' | 'fashion' | 'service' | 'tech'>('fashion');
+
+  // Interactive Toast
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const showToast = (msg: string) => {
@@ -22,44 +17,61 @@ export const Hero: React.FC = () => {
     setTimeout(() => setToastMessage(null), 3000);
   };
 
-  const simulatedWeight = Math.round(12 * (0.3 + 0.7 * (infillVal / 100)));
-  const simulatedPrice = simulatedWeight * 750;
+  const bizRecommendations = {
+    fashion: {
+      type: 'Toko Online & Katalog Interaktif',
+      tagline: 'Katalog produk estetik dengan checkout langsung ke WhatsApp tanpa potongan fee.',
+      estTime: '5-7 Hari Kerja',
+      highlight: 'Konversi order chat meningkat 3x lipat'
+    },
+    fnb: {
+      type: 'Landing Page Menu & Reservasi',
+      tagline: 'Buku menu digital interaktif, integrasi Google Maps, dan tombol order WhatsApp instan.',
+      estTime: '3-5 Hari Kerja',
+      highlight: 'Pelanggan langsung pesan tanpa install aplikasi'
+    },
+    service: {
+      type: 'Company Profile Elegan & Kredibel',
+      tagline: 'Membangun kepercayaan calon klien dan investor dengan portfolio profesional berkelas.',
+      estTime: '5-7 Hari Kerja',
+      highlight: 'Tampilan resmi yang meyakinkan partner bisnis'
+    },
+    tech: {
+      type: 'Custom Web & Interactive Engine',
+      tagline: 'Fitur unik berbasis React & Three.js seperti kalkulator instan dan simulasi digital.',
+      estTime: '7-12 Hari Kerja',
+      highlight: 'Solusi teknologi spesifik tanpa batas template'
+    }
+  };
+
+  const currentRec = bizRecommendations[selectedBiz];
 
   return (
     <section className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden bg-white bg-grid-pattern">
-      {/* Subtle Radial Ambient Colors */}
-      <div className="absolute top-10 left-1/4 w-[500px] h-[300px] bg-gradient-to-tr from-[#2C29FF]/8 to-transparent blur-3xl -z-10 rounded-full pointer-events-none" />
-      <div className="absolute top-20 right-1/4 w-[500px] h-[300px] bg-gradient-to-bl from-[#00B349]/8 to-transparent blur-3xl -z-10 rounded-full pointer-events-none" />
+      {/* Subtle Ambient Radial Light */}
+      <div className="absolute top-10 left-1/4 w-[500px] h-[300px] bg-gradient-to-tr from-[#2C29FF]/10 to-transparent blur-3xl -z-10 rounded-full pointer-events-none" />
+      <div className="absolute top-20 right-1/4 w-[500px] h-[300px] bg-gradient-to-bl from-[#00B349]/10 to-transparent blur-3xl -z-10 rounded-full pointer-events-none" />
 
-      {/* Floating Interactive Starbursts (Clickable with micro-toasts!) */}
+      {/* Floating Interactive Starbursts */}
       <button
         type="button"
         onClick={() => showToast('✦ Desain Visual Interaktif Bikin Customer Betah!')}
         title="Klik untuk kejutan!"
-        className="absolute top-20 left-4 md:left-16 w-12 h-12 md:w-16 md:h-16 animate-spin-slow hover:scale-125 transition-transform cursor-pointer focus:outline-hidden"
+        className="absolute top-20 left-4 md:left-14 w-12 h-12 md:w-16 md:h-16 animate-spin-slow hover:scale-125 transition-transform cursor-pointer focus:outline-hidden"
       >
         <img src="./images/starburst-blue.svg" alt="Starburst Biru" className="w-full h-full drop-shadow-md" />
       </button>
 
       <button
         type="button"
-        onClick={() => showToast('✨ 100% Koding Kustom Modern (React & Vite)')}
+        onClick={() => showToast('✨ Bikin Bisnismu Tampil Stand Out!')}
         title="Klik untuk kejutan!"
-        className="absolute top-36 right-6 md:right-24 w-10 h-10 md:w-14 md:h-14 animate-spin-slow hover:scale-125 transition-transform cursor-pointer focus:outline-hidden"
+        className="absolute top-36 right-6 md:right-20 w-10 h-10 md:w-14 md:h-14 animate-spin-slow hover:scale-125 transition-transform cursor-pointer focus:outline-hidden"
       >
         <img src="./images/starburst-red.svg" alt="Starburst Merah" className="w-full h-full drop-shadow-md" />
       </button>
 
-      <button
-        type="button"
-        onClick={() => showToast('🚀 Siap Tingkatkan Kredibilitas & Omzet Bisnis!')}
-        title="Klik untuk kejutan!"
-        className="absolute bottom-12 left-10 md:left-24 w-8 h-8 md:w-12 md:h-12 animate-spin-slow hover:scale-125 transition-transform cursor-pointer focus:outline-hidden"
-      >
-        <img src="./images/starburst-green.svg" alt="Starburst Hijau" className="w-full h-full drop-shadow-md" />
-      </button>
-
-      {/* Toast Notification for click interactions */}
+      {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed bottom-6 right-6 z-50 bg-slate-900 text-white px-4 py-2.5 rounded-2xl shadow-2xl border border-slate-700 text-xs font-bold flex items-center gap-2 animate-bounce">
           <Sparkles className="w-4 h-4 text-[#00B349]" />
@@ -70,7 +82,7 @@ export const Hero: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
-          {/* Left Column: Signature Poster Headlines & CTAs (6 cols) */}
+          {/* Left Column: Headlines & CTAs (6 cols) */}
           <div className="lg:col-span-6 text-left space-y-6">
             
             {/* Top Pill Badges */}
@@ -100,17 +112,17 @@ export const Hero: React.FC = () => {
               Bikin website dengan visual interaktif yang bikin betah customer. Ubah pengunjung biasa menjadi pelanggan setia lewat tampilan profesional, responsif di ponsel, dan berkecepatan tinggi.
             </p>
 
-            {/* Highlights */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-1 text-xs text-slate-700 font-bold">
-              <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-50 border border-slate-200">
+            {/* Core Trust Badges */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-1 text-xs text-slate-800 font-bold">
+              <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 border border-slate-200 shadow-2xs">
                 <CheckCircle2 className="w-4 h-4 text-[#00B349] shrink-0" />
                 <span>Desain Stand Out</span>
               </div>
-              <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-50 border border-slate-200">
+              <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 border border-slate-200 shadow-2xs">
                 <CheckCircle2 className="w-4 h-4 text-[#2C29FF] shrink-0" />
                 <span>100% Mobile Ready</span>
               </div>
-              <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-50 border border-slate-200">
+              <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 border border-slate-200 shadow-2xs">
                 <CheckCircle2 className="w-4 h-4 text-[#00B349] shrink-0" />
                 <span>Integrasi WhatsApp</span>
               </div>
@@ -153,235 +165,170 @@ export const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Interactive Live Sandbox Simulator (6 cols) */}
-          <div className="lg:col-span-6">
-            <div className="bg-white rounded-3xl border-2 border-slate-200 shadow-xl overflow-hidden">
+          {/* Right Column: High-Converting Interactive Studio Showcase Card (6 cols) */}
+          <div className="lg:col-span-6 space-y-4">
+            
+            {/* Main Showcase Browser Card */}
+            <div className="relative bg-white rounded-3xl border-2 border-slate-200 shadow-xl overflow-hidden group">
               
-              {/* Simulator Header & Device Switcher */}
-              <div className="p-3 bg-slate-100/90 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2">
-                
-                {/* Browser Traffic Dots */}
+              {/* Browser Window Header */}
+              <div className="bg-slate-100/90 px-4 py-2.5 border-b border-slate-200 flex items-center justify-between">
                 <div className="flex items-center gap-1.5">
                   <span className="w-3 h-3 rounded-full bg-red-400" />
                   <span className="w-3 h-3 rounded-full bg-amber-400" />
                   <span className="w-3 h-3 rounded-full bg-emerald-400" />
-                  <span className="text-[11px] font-mono text-slate-500 ml-2 font-bold hidden sm:inline">
-                    Simulasi Web Interaktif
-                  </span>
                 </div>
-
-                {/* Device Switcher (Desktop vs Mobile) */}
-                <div className="flex items-center gap-1 bg-white p-1 rounded-xl border border-slate-200 shadow-xs">
-                  <button
-                    type="button"
-                    onClick={() => setDeviceMode('desktop')}
-                    className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
-                      deviceMode === 'desktop'
-                        ? 'bg-[#2C29FF] text-white shadow-xs'
-                        : 'text-slate-600 hover:text-slate-900'
-                    }`}
-                  >
-                    <Laptop className="w-3.5 h-3.5" />
-                    <span>Desktop</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setDeviceMode('mobile')}
-                    className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
-                      deviceMode === 'mobile'
-                        ? 'bg-[#00B349] text-white shadow-xs'
-                        : 'text-slate-600 hover:text-slate-900'
-                    }`}
-                  >
-                    <Smartphone className="w-3.5 h-3.5" />
-                    <span>Mobile</span>
-                  </button>
+                <div className="flex items-center gap-1 bg-white px-3 py-1 rounded-md text-[11px] font-mono text-slate-500 border border-slate-200 shadow-2xs">
+                  <ShieldCheck className="w-3 h-3 text-[#00B349]" />
+                  <span>webisa.studio/showcase</span>
                 </div>
+                <span className="text-[11px] font-bold text-[#2C29FF] flex items-center gap-1">
+                  <Sparkles className="w-3 h-3" />
+                  Karya Asli
+                </span>
               </div>
 
-              {/* Interactive App Tabs */}
-              <div className="bg-slate-50 px-3 py-2 border-b border-slate-200 flex items-center gap-2 overflow-x-auto">
+              {/* Interactive Showcase Tabs */}
+              <div className="p-3 bg-slate-50 border-b border-slate-200 flex items-center gap-1.5 overflow-x-auto">
                 <button
                   type="button"
-                  onClick={() => setActiveTab('3d')}
+                  onClick={() => setActiveShowcase('treedible')}
                   className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 flex items-center gap-1.5 ${
-                    activeTab === '3d'
-                      ? 'bg-white text-[#2C29FF] border border-blue-200 shadow-xs'
-                      : 'text-slate-600 hover:text-slate-900'
+                    activeShowcase === 'treedible'
+                      ? 'bg-[#2C29FF] text-white shadow-xs'
+                      : 'bg-white text-slate-600 hover:text-slate-900 border border-slate-200'
                   }`}
                 >
-                  <Box className="w-3.5 h-3.5 text-[#2C29FF]" />
-                  <span>3D Slicer Engine (Treedible)</span>
+                  <Layers className="w-3.5 h-3.5" />
+                  <span>Interactive 3D App</span>
                 </button>
                 <button
                   type="button"
-                  onClick={() => setActiveTab('ecommerce')}
+                  onClick={() => setActiveShowcase('company')}
                   className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 flex items-center gap-1.5 ${
-                    activeTab === 'ecommerce'
-                      ? 'bg-white text-[#00B349] border border-emerald-200 shadow-xs'
-                      : 'text-slate-600 hover:text-slate-900'
+                    activeShowcase === 'company'
+                      ? 'bg-[#00B349] text-white shadow-xs'
+                      : 'bg-white text-slate-600 hover:text-slate-900 border border-slate-200'
                   }`}
                 >
-                  <ShoppingBag className="w-3.5 h-3.5 text-[#00B349]" />
-                  <span>Toko Online & Checkout WA</span>
+                  <Star className="w-3.5 h-3.5" />
+                  <span>Hero Showcase P1S</span>
                 </button>
               </div>
 
-              {/* Simulator Screen Container */}
-              <div className={`p-4 transition-all duration-300 flex justify-center ${
-                deviceMode === 'mobile' ? 'bg-slate-100 py-6' : 'bg-white'
-              }`}>
-                <div className={`w-full transition-all duration-300 ${
-                  deviceMode === 'mobile'
-                    ? 'max-w-[280px] bg-white rounded-3xl border-4 border-slate-800 p-3 shadow-2xl'
-                    : 'max-w-none'
-                }`}>
-                  
-                  {/* Phone Speaker Notch in Mobile Mode */}
-                  {deviceMode === 'mobile' && (
-                    <div className="w-20 h-3 bg-slate-800 rounded-full mx-auto mb-3" />
-                  )}
+              {/* Showcase Image & Live Overlay Badges */}
+              <div className="relative p-3 bg-slate-100/60 overflow-hidden">
+                <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-sm relative group">
+                  <img
+                    src={
+                      activeShowcase === 'treedible'
+                        ? './images/treedible-calculator.png'
+                        : './images/treedible-hero.png'
+                    }
+                    alt="Webisa Client Showcase"
+                    className="w-full h-auto object-cover transform group-hover:scale-102 transition-transform duration-500"
+                  />
 
-                  {/* TAB 1: 3D SLICER INTERACTIVE DEMO */}
-                  {activeTab === '3d' && (
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between text-xs font-bold text-slate-800">
-                        <span className="flex items-center gap-1 text-[#2C29FF]">
-                          <Box className="w-4 h-4" />
-                          3D Interactive Geometry
-                        </span>
-                        <span className="text-[11px] bg-emerald-50 text-[#00B349] px-2 py-0.5 rounded border border-emerald-200">
-                          Bambu Lab P1S Bed
-                        </span>
-                      </div>
-
-                      {/* Interactive 3D Canvas Box */}
-                      <div className="relative h-44 bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center overflow-hidden group">
-                        
-                        {/* 3D Cube that rotates based on slider */}
-                        <div
-                          className="w-20 h-20 transition-transform duration-200 cursor-grab active:cursor-grabbing"
-                          style={{
-                            transform: `perspective(400px) rotateX(20deg) rotateY(${rotationDeg}deg)`,
-                            transformStyle: 'preserve-3d'
-                          }}
-                          onClick={() => setRotationDeg((prev) => (prev + 45) % 360)}
-                          title="Klik objek untuk memutar sudut!"
-                        >
-                          <div className="w-full h-full bg-gradient-to-br from-[#2C29FF] to-[#00B349] rounded-xl shadow-xl flex items-center justify-center text-white font-mono text-xs font-bold border-2 border-white">
-                            3D Model
-                          </div>
-                        </div>
-
-                        {/* Interactive Rotation Controller */}
-                        <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between bg-white/90 backdrop-blur-xs px-2.5 py-1 rounded-xl border border-slate-200 text-[10px] text-slate-600">
-                          <span className="flex items-center gap-1 font-semibold">
-                            <RotateCw className="w-3 h-3 text-[#2C29FF]" /> Putar: {rotationDeg}°
-                          </span>
-                          <input
-                            type="range"
-                            min="0"
-                            max="360"
-                            value={rotationDeg}
-                            onChange={(e) => setRotationDeg(Number(e.target.value))}
-                            className="w-24 accent-[#2C29FF] cursor-pointer"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Infill Slider & Live Price calculation */}
-                      <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2">
-                        <div className="flex justify-between text-xs font-bold text-slate-700">
-                          <span>Kerapatan Infill: {infillVal}%</span>
-                          <span className="text-[#00B349]">±{simulatedWeight} gram</span>
-                        </div>
-                        <input
-                          type="range"
-                          min="10"
-                          max="100"
-                          step="5"
-                          value={infillVal}
-                          onChange={(e) => setInfillVal(Number(e.target.value))}
-                          className="w-full accent-[#00B349] cursor-pointer h-1.5 bg-slate-200 rounded-lg"
-                        />
-                        <div className="flex justify-between items-center pt-1 border-t border-slate-200 text-xs">
-                          <span className="text-slate-500 font-medium">Estimasi Biaya:</span>
-                          <span className="font-extrabold text-[#2C29FF] text-sm font-mono">
-                            {formatRupiah(simulatedPrice)}
-                          </span>
-                        </div>
-                      </div>
+                  {/* Floating Metric Badge 1 (Speed) */}
+                  <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-200 shadow-md flex items-center gap-2 text-xs font-bold text-slate-900 animate-float">
+                    <div className="w-6 h-6 rounded-lg bg-emerald-100 text-[#00B349] flex items-center justify-center">
+                      <Zap className="w-3.5 h-3.5 fill-[#00B349]" />
                     </div>
-                  )}
-
-                  {/* TAB 2: E-COMMERCE & DIRECT WA DEMO */}
-                  {activeTab === 'ecommerce' && (
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between text-xs font-bold text-slate-800">
-                        <span className="flex items-center gap-1 text-[#00B349]">
-                          <ShoppingBag className="w-4 h-4" />
-                          Katalog Toko Online
-                        </span>
-                        <span className="text-[11px] bg-blue-50 text-[#2C29FF] px-2 py-0.5 rounded border border-blue-200 font-bold">
-                          Keranjang: {cartCount}
-                        </span>
-                      </div>
-
-                      {/* Product Card */}
-                      <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 space-y-2.5">
-                        <div className="flex items-center gap-3">
-                          <div className="w-14 h-14 rounded-xl bg-gradient-to-tr from-[#2C29FF] to-[#00B349] text-white flex items-center justify-center font-bold text-xs shadow-sm">
-                            PRODUK
-                          </div>
-                          <div>
-                            <h5 className="font-bold text-xs text-slate-900">Custom Mechanical Part #04</h5>
-                            <span className="text-[11px] text-slate-500 block">Koleksi Desain Fungsional</span>
-                            <span className="font-extrabold text-sm text-[#00B349]">Rp 85.000</span>
-                          </div>
-                        </div>
-
-                        {/* Interactive Color Choice */}
-                        <div className="flex items-center justify-between pt-1 text-xs">
-                          <span className="text-slate-500 text-[11px]">Varian: {selectedColor}</span>
-                          <div className="flex gap-1.5">
-                            {['Biru Webisa', 'Hijau Neon', 'Hitam Doff'].map((col) => (
-                              <button
-                                key={col}
-                                type="button"
-                                onClick={() => setSelectedColor(col)}
-                                className={`w-5 h-5 rounded-full border-2 ${
-                                  col === 'Biru Webisa' ? 'bg-[#2C29FF]' : col === 'Hijau Neon' ? 'bg-[#00B349]' : 'bg-slate-900'
-                                } ${selectedColor === col ? 'ring-2 ring-offset-1 ring-slate-800' : 'opacity-70'}`}
-                              />
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Add to Cart Interactive Button */}
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setCartCount((prev) => prev + 1);
-                            showToast(`🛒 Ditambahkan: Custom Part (${selectedColor})`);
-                          }}
-                          className="w-full py-2 bg-[#00B349] hover:bg-[#00963e] text-white rounded-xl text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 active:scale-95"
-                        >
-                          <ShoppingBag className="w-3.5 h-3.5" />
-                          <span>Tambah ke Keranjang ({cartCount})</span>
-                        </button>
-                      </div>
+                    <div>
+                      <span className="block text-[10px] text-slate-400 font-semibold uppercase">Google Speed</span>
+                      <span className="text-[#00B349]">⚡ 99/100 Skor HP</span>
                     </div>
-                  )}
-
-                  {/* Simulator Footer Caption */}
-                  <div className="mt-2 text-[10px] text-center text-slate-400 font-medium">
-                    ⚡ Komponen interaktif di atas dapat dicoba langsung secara nyata.
                   </div>
 
+                  {/* Floating Metric Badge 2 (Conversion) */}
+                  <div className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-200 shadow-md flex items-center gap-2 text-xs font-bold text-slate-900">
+                    <div className="w-6 h-6 rounded-lg bg-blue-100 text-[#2C29FF] flex items-center justify-center">
+                      <TrendingUp className="w-3.5 h-3.5" />
+                    </div>
+                    <div>
+                      <span className="block text-[10px] text-slate-400 font-semibold uppercase">Hasil Nyata</span>
+                      <span className="text-[#2C29FF]">+300% Chat WhatsApp</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
+              {/* Showcase Footer Bar */}
+              <div className="p-3 bg-white border-t border-slate-200 flex items-center justify-between text-xs">
+                <div className="flex items-center gap-1.5 text-slate-700 font-semibold">
+                  <CheckCircle2 className="w-4 h-4 text-[#00B349]" />
+                  <span>Studi Kasus: <strong>Treedible 3D Printing Malang</strong></span>
+                </div>
+                <a
+                  href="https://supErj1izyyyy.github.io/treedible-web/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-bold text-[#2C29FF] hover:underline flex items-center gap-1 text-[11px]"
+                >
+                  Buka Demo Live
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
             </div>
+
+            {/* Interactive "Pencari Solusi Cepat" (Quick Business Matcher) */}
+            <div className="p-4 bg-white rounded-2xl border-2 border-slate-200 shadow-sm space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-extrabold text-slate-900 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-[#00B349]" />
+                  Pilih Bidang Bisnismu:
+                </span>
+                <span className="text-[11px] text-slate-400 font-medium">Rekomendasi Instan</span>
+              </div>
+
+              {/* Category Pills */}
+              <div className="grid grid-cols-4 gap-1.5">
+                {[
+                  { id: 'fashion', label: 'Retail / Olshop' },
+                  { id: 'fnb', label: 'Kuliner / Cafe' },
+                  { id: 'service', label: 'Jasa & Agensi' },
+                  { id: 'tech', label: 'Startup / Tech' },
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => setSelectedBiz(item.id as any)}
+                    className={`py-1.5 px-2 rounded-xl text-[11px] font-bold transition-all text-center ${
+                      selectedBiz === item.id
+                        ? 'bg-[#2C29FF] text-white shadow-xs'
+                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Dynamic Result Box */}
+              <div className="p-3 bg-emerald-50/70 border border-emerald-200 rounded-xl flex items-center justify-between gap-3">
+                <div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-xs font-black text-slate-900">{currentRec.type}</span>
+                    <span className="text-[10px] bg-[#00B349] text-white px-2 py-0.2 rounded-full font-bold">
+                      {currentRec.estTime}
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-600 mt-0.5 leading-snug">
+                    {currentRec.tagline}
+                  </p>
+                </div>
+                <a
+                  href={generateWhatsAppConsultationUrl(`Paket ${currentRec.type}`, `Tertarik untuk bisnis bidang ${selectedBiz}`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-2 bg-[#00B349] hover:bg-[#00963e] text-white rounded-xl text-xs font-extrabold shrink-0 shadow-xs flex items-center gap-1 transition-transform active:scale-95"
+                >
+                  <span>Chat WA</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </div>
+
           </div>
 
         </div>
