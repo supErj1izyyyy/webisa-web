@@ -30,10 +30,10 @@ export const Logo: React.FC<LogoProps> = ({ className = '', size = 'md' }) => {
         <path d="M 100 0 L 121 62 L 181 31 L 148 85 L 200 100 L 148 115 L 181 169 L 121 138 L 100 200 L 79 138 L 19 169 L 52 115 L 0 100 L 52 85 L 19 31 L 79 62 Z" />
       </svg>
 
-      {/* Brand Wordmark: "web" (Electric Blue) + "isa" (Neon Green) */}
+      {/* Brand Wordmark: "we" (Electric Blue) + "bisa" (Neon Green) */}
       <span className={`font-black ${sizeClasses[size]} font-sans flex items-baseline leading-none`}>
-        <span className="text-[#2C29FF] dark:text-[#5250FF]">web</span>
-        <span className="text-[#00B349] dark:text-[#10D65D] -ml-0.5">isa</span>
+        <span className="text-[#2C29FF]">we</span>
+        <span className="text-[#00B349]">bisa</span>
       </span>
     </div>
   );

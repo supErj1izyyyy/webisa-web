@@ -32,22 +32,21 @@ export const Navbar: React.FC = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
           ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200/80 py-3.5'
           : 'bg-white/80 backdrop-blur-xs py-5 border-b border-slate-100'
-      }`}
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo & Availability Status */}
+          {/* Logo & Tagline Badge */}
           <div className="flex items-center gap-3">
             <a href="#" className="flex items-center group" aria-label="Webisa Beranda">
               <Logo size="md" />
             </a>
-            <span className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-[#00B349] border border-emerald-200">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00B349] animate-pulse" />
-              Slot Project Tersedia
+            <span className="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-[#00B349] border border-emerald-200">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#00B349]" />
+              Modern • Interactive • Custom
             </span>
           </div>
 
@@ -125,10 +124,9 @@ export const Navbar: React.FC = () => {
               href={SITE_CONFIG.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 py-2 text-xs font-bold text-slate-700 bg-slate-100 rounded-xl"
-            >
-              <InstagramIcon className="w-4 h-4 text-[#2C29FF]" />
+              className="flex items-center justify-center gap-2 py-2 text-xs font-bold text-slate-700 bg-slate-100 rounded-xl">
               <span>Instagram @webisa_website</span>
+              <InstagramIcon className="w-4 h-4 text-[#2C29FF]" />
             </a>
             <a
               href={generateWhatsAppConsultationUrl()}

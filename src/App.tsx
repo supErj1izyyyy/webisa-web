@@ -1,7 +1,6 @@
 import React from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
-import { InteractiveTicker } from './components/InteractiveTicker';
 import { BeforeAfterSection } from './components/BeforeAfterSection';
 import { ServicesSection } from './components/ServicesSection';
 import { OrderingGuideSection } from './components/OrderingGuideSection';
@@ -15,13 +14,10 @@ export const App: React.FC = () => {
       {/* Sticky Header */}
       <Navbar />
 
-      {/* Main Content Sections: Pengenalan -> Cara Pesan -> Alur Pemesanan -> FAQ */}
+      {/* Main Content Sections: Pengenalan -> Cara Pemesanan -> Alur Pemesanan -> FAQ */}
       <main className="flex-1">
         {/* 1. Pengenalan Webisa & Headline Poster */}
         <Hero />
-
-        {/* Moving Ticker of Capabilities */}
-        <InteractiveTicker />
 
         {/* Nilai Tambah: Web Jadul vs Standar Webisa */}
         <BeforeAfterSection />
